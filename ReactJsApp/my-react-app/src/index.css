@@ -1,0 +1,49 @@
+.welcome-msg{
+  font-size: 2.5rem;
+  background-color: rgba(0, 255, 21, 0.64);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+.default-msg{
+  font-size: 2.5rem;
+  background-color: rgba(255, 0, 51, 0.64);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: rgb(68, 179, 227);
+  color: #fff;
+}
+.stopWatch{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid;
+  border-radius: 30%;
+  padding: 30px;
+  width: 40%;
+}
+.display{
+  font-size: 5rem;
+  font-family: monospace;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.75);
+}
+.controls button{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 5px;
+  transition: all 0.3s;
+}
+.start-button{
+  background-color: rgba(11, 241, 99, 0.674);
+}
+.stop-button{
+  background-color: rgba(241, 11, 11, 0.674);
+}
+.reset-button{
+  background-color: rgba(11, 61, 241, 0.674);
+}
