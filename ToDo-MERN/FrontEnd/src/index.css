@@ -73,10 +73,11 @@ body {
   border-bottom: 2px solid #d1d3d4;
   cursor: pointer;
 }
-.task span {
+.task input {
   font-family: "Poppins", sans-serif;
   font-size: 0.9em;
   font-weight: 400;
+  border: none;
 }
 .task button {
   color: #ffffff;

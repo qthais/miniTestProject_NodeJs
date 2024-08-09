@@ -1,8 +1,8 @@
-const Model=require('../models/ToDoList')
+const ListModel=require('../models/ToDoList')
 class ListController{
     async show(req,res,next){
         try{
-            let data= await Model.find({})
+            let data= await ListModel.find({})
             res.json(data)
           }
           catch(err){
@@ -12,7 +12,7 @@ class ListController{
     async add(req,res,next){
       try{
         let data=req.body
-        const task=new Model(data)
+        const task=new ListModel(data)
         await task.save()
         res.json(task)
       }catch(err){
@@ -22,7 +22,7 @@ class ListController{
     async delete(req,res,next){
       try{
         let id=req.params.id
-        await Model.findByIdAndDelete(id)
+        await ListModel.findByIdAndDelete(id)
         res.json({ message: 'Task deleted successfully' });
       }
       catch(err){
@@ -32,7 +32,7 @@ class ListController{
     async update(req,res,next){
       try{
         let id=req.params.id
-        const updatedTask=await Model.findByIdAndUpdate(id,req.body)
+        const updatedTask=await ListModel.findByIdAndUpdate(id,req.body)
         if (!updatedTask) {
         return res.status(404).json({ message: 'Task not found' });
       }

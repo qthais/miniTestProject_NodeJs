@@ -4,5 +4,5 @@ const List = new Schema({
     id: Number,
     name: String
   });
-const Model= mongoose.model('List', List, 'todoappcollection');
-module.exports= Model
+const ListModel= mongoose.model('List', List, 'todoappcollection');
+module.exports= ListModel

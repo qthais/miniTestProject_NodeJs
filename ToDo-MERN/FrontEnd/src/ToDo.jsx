@@ -4,6 +4,8 @@ import './index.css'
 function ToDo() {
     const [items, setItems] = useState([]);
     const [newTask, setNewTask] = useState('');
+    const [editTask,setEditTask]=useState('')
+    const [taskToEdit, setTaskToEdit] = useState(null);
     const handleAddTask = async () => {
         try {
             if (newTask.trim() === '') {
@@ -20,6 +22,13 @@ function ToDo() {
         try{
             await axios.delete(`http://localhost:3000/delete/${id}`)
             setItems(items.filter((item)=>item._id!=id))
+        }catch (err){
+            console.log(err)
+        }
+    }
+    const handleUpdateTask=async(id)=>{
+        try{
+            await axios.put(`http://localhost:3000/update/${id}`,{name:editTask})
         }catch (err){
             console.log(err)
         }
@@ -48,8 +57,16 @@ function ToDo() {
                     {
                         items.map((e) =>
                         (<div key={e._id} className="task" >
-                            <span >{e.name}</span>
-                            <button className="edit">
+                            <input type='text' onChange={(e)=>setEditTask(e.target.value)} value={(e._id==taskToEdit)?editTask:e.name} disabled={taskToEdit!==e._id} ></input>
+                            <button className="edit" onClick={()=>{
+                                if(e._id==taskToEdit){
+                                    handleUpdateTask(e._id)
+                                }
+                                else{                                 
+                                    setTaskToEdit(e._id);
+                                    setEditTask(e.name);
+                                }
+                                }}>
                                 <i className="fa-solid fa-pen-to-square"></i>
                             </button>
                             <button onClick={()=>{handleDeleteTask(e._id)}} className="delete">
