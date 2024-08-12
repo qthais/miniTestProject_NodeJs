@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ToDo from './ToDo.jsx'
+import App from './App'
+import { UserProvider } from './UserContext';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ToDo></ToDo>
+    <UserProvider>
+      <App />
+    </UserProvider>
   </React.StrictMode>,
 )

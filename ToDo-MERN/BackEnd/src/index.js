@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cookieParser = require("cookie-parser");
 const cors= require('cors')
 const db=require('./config/dbConnect')
 const route=require('./routes/index')
@@ -8,7 +9,13 @@ const multer = require('multer');
 const upload = multer(); // For handling form-data without files
 app.use(upload.none());
 const port = 3000
-app.use(cors());
+var corsOptions = {
+  origin: 'http://localhost:5173', // Frontend URL
+  credentials: true, 
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 db.connect()
