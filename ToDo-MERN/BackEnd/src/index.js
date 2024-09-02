@@ -1,10 +1,12 @@
 const express = require('express')
+const dotenv=require('dotenv')
 const app = express()
 const cookieParser = require("cookie-parser");
 const cors= require('cors')
 const db=require('./config/dbConnect')
 const route=require('./routes/index')
 const multer = require('multer');
+dotenv.config()
 // Configure multer
 const upload = multer(); // For handling form-data without files
 app.use(upload.none());

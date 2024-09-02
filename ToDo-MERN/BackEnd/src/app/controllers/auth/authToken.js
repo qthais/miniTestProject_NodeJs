@@ -1,7 +1,7 @@
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); // Import jsonwebtoken
-const jwtSecret = '2d2b25db4531f55ca2e7fb01dbfec1d7fefce889e33ec2377d9de196fbc33093db3c99';// Define your JWT secret
+// Define your JWT secret
 
 exports.register = async (req, res, next) => {
     const { username, password } = req.body;
@@ -20,7 +20,7 @@ exports.register = async (req, res, next) => {
         const maxAge = 3 * 60 * 60; // 3 hours in seconds
         const token = jwt.sign(
             { id: user._id, username, role: user.role },
-            jwtSecret,
+            process.env.SECRET_KEY,
             { expiresIn: maxAge }
         );
 
@@ -63,7 +63,7 @@ exports.login = async (req, res, next) => {
             const maxAge = 3 * 60 * 60;
             const token = jwt.sign(
                 { id: user._id, username, role: user.role },
-                jwtSecret,
+                process.env.SECRET_KEY,
                 {
                     expiresIn: maxAge, // 3hrs in sec
                 }
@@ -94,7 +94,7 @@ exports.login = async (req, res, next) => {
 exports.adminAuth = (req, res, next) => {
     const token = req.cookies.jwt
     if (token) {
-        jwt.verify(token, jwtSecret, (err, decodedToken) => {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
             if (err) {
                 return res.status(401).json({ message: "Not authorized" })
             } else {
@@ -120,7 +120,7 @@ exports.adminAuth = (req, res, next) => {
 exports.userAuth = (req, res, next) => {
     const token = req.cookies.jwt
     if (token) {
-        jwt.verify(token, jwtSecret, (err, decodedToken) => {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
             if (err) {
                 return res.status(401).json({ message: "Not authorized" })
             } else {

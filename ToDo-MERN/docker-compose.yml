@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  FE:
+    image: frontend
+    stdin_open: true
+    ports:
+      - "5173:5173"
+
+  BE:
+    image: backend
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mymongo # Use the custom MongoDB image with preloaded data
+    container_name: my-mongo-container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - my-network
+
+volumes:
+  mongo-data:
+    # Persistent storage for MongoDB data
+
+networks:
+  my-network:
+    driver: bridge
